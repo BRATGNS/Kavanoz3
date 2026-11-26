@@ -1,0 +1,453 @@
+```html
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buluşma Kavanozumuz 💚</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --bg: #0f3d2a;
+    --deep: #082a1c;
+    --paper: #fbf5e9;
+    --ink: #19452e;
+    --font: 'Caveat', cursive;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    overflow: hidden;
+    background: radial-gradient(ellipse at center, #1c6846, var(--bg) 55%, var(--deep));
+    color: white;
+    font-family: var(--font);
+}
+
+main {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+    z-index: 2;
+}
+
+h1 {
+    font-size: clamp(40px, 9vw, 65px);
+    margin: 0;
+    text-shadow: 0 3px 15px #ffffff40;
+}
+
+.subtitle {
+    font-size: 25px;
+    opacity: .85;
+    margin: 5px 0 15px;
+}
+
+#jar {
+    width: min(65vw, 260px);
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 0;
+    filter: drop-shadow(0 15px 20px #0007);
+    animation: float 4s ease-in-out infinite;
+    -webkit-tap-highlight-color: transparent;
+}
+
+#jar svg {
+    width: 100%;
+    display: block;
+}
+
+#jar.shake {
+    animation: shake .75s ease-in-out;
+}
+
+@keyframes float {
+    50% { transform: translateY(-9px); }
+}
+
+@keyframes shake {
+    0%,100% { transform: rotate(0); }
+    15% { transform: rotate(-10deg); }
+    30% { transform: rotate(9deg); }
+    45% { transform: rotate(-8deg); }
+    60% { transform: rotate(6deg); }
+    75% { transform: rotate(-3deg); }
+}
+
+.hint {
+    font-size: 25px;
+    margin-top: 10px;
+}
+
+.counter {
+    font-size: 20px;
+    opacity: .7;
+    margin-top: 8px;
+}
+
+/* YAĞAN KALPLER */
+
+.heart {
+    position: fixed;
+    top: -40px;
+    z-index: 1;
+    color: white;
+    pointer-events: none;
+    animation: fall linear infinite;
+    text-shadow: 0 0 10px #fff9;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-10vh) rotate(0deg);
+        opacity: 0;
+    }
+    15% { opacity: .9; }
+    85% { opacity: .8; }
+    100% {
+        transform: translateY(115vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* KAĞIT PENCERESİ */
+
+#overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 5;
+    background: #041b11c9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: .3s;
+}
+
+#overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.paper {
+    width: min(90vw, 390px);
+    min-height: 310px;
+    padding: 40px 25px 25px;
+    background-color: var(--paper);
+    background-image: repeating-linear-gradient(
+        transparent 0px,
+        transparent 39px,
+        #19452e20 40px
+    );
+    color: var(--ink);
+    border-radius: 5px;
+    box-shadow: 0 20px 60px #0008;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    transform: scale(.3) rotate(15deg);
+    opacity: 0;
+}
+
+#overlay.show .paper {
+    animation: openPaper .55s cubic-bezier(.2,1.3,.4,1) forwards;
+}
+
+@keyframes openPaper {
+    to {
+        transform: scale(1) rotate(-2deg);
+        opacity: 1;
+    }
+}
+
+.paper::before {
+    content: "";
+    position: absolute;
+    width: 110px;
+    height: 25px;
+    background: #e6a5b5cc;
+    top: -12px;
+    transform: rotate(-3deg);
+}
+
+.paper-title {
+    font-size: 32px;
+    color: #bd6178;
+    margin-bottom: 15px;
+}
+
+#activity {
+    font-size: clamp(27px, 7vw, 34px);
+    font-weight: 700;
+    line-height: 1.25;
+    margin: 15px 0 25px;
+}
+
+.paper button {
+    background: var(--ink);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 9px 25px;
+    font-family: var(--font);
+    font-size: 23px;
+    cursor: pointer;
+}
+
+.paper button:hover {
+    background: #286544;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<main>
+
+    <h1>Buluşma Kavanozumuz 💚</h1>
+
+    <p class="subtitle">
+        Birlikte yapacağımız küçük şeyler...
+    </p>
+
+    <button id="jar" aria-label="Kavanozdan bir aktivite çek">
+
+        <svg viewBox="0 0 240 290" xmlns="http://www.w3.org/2000/svg">
+
+            <defs>
+                <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#ffffff" stop-opacity=".5"/>
+                    <stop offset="45%" stop-color="#d8fff0" stop-opacity=".12"/>
+                    <stop offset="100%" stop-color="#ffffff" stop-opacity=".3"/>
+                </linearGradient>
+                <linearGradient id="lid" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#e6cda0"/>
+                    <stop offset="100%" stop-color="#a98a5b"/>
+                </linearGradient>
+                <clipPath id="inside">
+                    <path d="M48 83 Q48 70 65 70 H175 Q192 70 192 83 L202 235 Q202 258 180 258 H60 Q38 258 38 235 Z"/>
+                </clipPath>
+            </defs>
+
+            <!-- KAVANOZ KAPAĞI -->
+            <rect x="65" y="38" width="110" height="30" rx="7"
+                  fill="url(#lid)" stroke="#e9d7b3" stroke-width="2"/>
+            <path d="M72 48 H168 M72 57 H168"
+                  stroke="#8f754d" stroke-width="2" opacity=".5"/>
+
+            <!-- KAVANOZ İÇİ -->
+            <g clip-path="url(#inside)">
+                <rect x="38" y="70" width="164" height="190" fill="#d9fff0" opacity=".1"/>
+
+                <g transform="rotate(-12 85 170)">
+                    <rect x="57" y="130" width="65" height="48" rx="3" fill="#fff0c9"/>
+                    <path d="M65 143 H110 M65 153 H105" stroke="#b99c73" stroke-width="2"/>
+                </g>
+
+                <g transform="rotate(14 150 180)">
+                    <rect x="120" y="145" width="60" height="52" rx="3" fill="#f6cbd3"/>
+                    <path d="M128 158 H170 M128 168 H165" stroke="#b77d87" stroke-width="2"/>
+                </g>
+
+                <g transform="rotate(-5 120 210)">
+                    <rect x="85" y="185" width="75" height="45" rx="3" fill="#fff7df"/>
+                    <path d="M95 198 H150 M95 208 H145" stroke="#b99c73" stroke-width="2"/>
+                </g>
+
+                <g transform="rotate(10 90 110)">
+                    <rect x="65" y="83" width="75" height="55" rx="3" fill="#f6d9a9"/>
+                    <path d="M75 98 H130 M75 108 H125" stroke="#b99c73" stroke-width="2"/>
+                </g>
+
+            </g>
+
+            <!-- CAM GÖRÜNÜMÜ -->
+            <path d="M48 83 Q48 70 65 70 H175 Q192 70 192 83 L202 235 Q202 258 180 258 H60 Q38 258 38 235 Z"
+                  fill="url(#glass)" stroke="#ffffff" stroke-width="4"/>
+
+            <path d="M53 100 L48 220" stroke="#ffffff" stroke-width="7"
+                  stroke-linecap="round" opacity=".35"/>
+
+            <path d="M187 105 L192 220" stroke="#ffffff" stroke-width="4"
+                  stroke-linecap="round" opacity=".3"/>
+
+            <path d="M65 247 Q120 257 175 247"
+                  stroke="#ffffff" stroke-width="3" fill="none" opacity=".5"/>
+
+            <text x="120" y="280" text-anchor="middle"
+                  font-size="15" fill="#fff" font-family="cursive">
+                OUR LITTLE PLANS
+            </text>
+
+        </svg>
+
+    </button>
+
+    <div class="hint">Kavanoza dokun ve bir kâğıt seç 💌</div>
+
+    <div class="counter" id="counter">20 küçük hayalimiz var...</div>
+
+</main>
+
+<!-- KAĞIT PENCERESİ -->
+
+<div id="overlay">
+    <div class="paper">
+        <div class="paper-title">Birlikte yapalım... 💗</div>
+
+        <p id="activity"></p>
+
+        <button id="close">Kavanoza geri koy 💚</button>
+    </div>
+</div>
+
+<script>
+
+// 20 FARKLI AKTİVİTE
+
+const activities = [
+    "Birlikte gün batımını izleyelim 🌅",
+    "Birbirimize kahve ısmarlayalım ☕",
+    "El ele uzun bir yürüyüş yapalım 🌿",
+    "Birlikte sinemaya gidelim 🎬",
+    "Birbirimize küçük hediyeler seçelim 🎁",
+    "Beraber fotoğraf çekilelim 📸",
+    "Birlikte dondurma yiyelim 🍦",
+    "Bir parkta oturup saatlerce konuşalım 💚",
+    "Birlikte yeni bir yer keşfedelim 🗺️",
+    "Birbirimize şarkı önerelim 🎵",
+    "Birlikte piknik yapalım 🧺",
+    "Birlikte oyun oynayalım 🎮",
+    "Yağmurda birlikte yürüyelim ☔",
+    "Birbirimize komik fotoğraflar çekelim 😂",
+    "Birlikte tatlı yiyelim 🍰",
+    "Gece yıldızları izleyelim ✨",
+    "Birlikte yemek yapalım 🍝",
+    "Birbirimize mektup yazalım 💌",
+    "Sahilde oturup denizi izleyelim 🌊",
+    "Hiç plan yapmadan güzel bir gün geçirelim ❤️"
+];
+
+// DEĞİŞKENLER
+
+let remaining = [...activities];
+let isAnimating = false;
+
+const jar = document.getElementById("jar");
+const overlay = document.getElementById("overlay");
+const activityText = document.getElementById("activity");
+const counter = document.getElementById("counter");
+const closeButton = document.getElementById("close");
+
+// KAVANOZ TIKLAMA
+
+jar.addEventListener("click", () => {
+
+    if (isAnimating || overlay.classList.contains("show")) return;
+
+    isAnimating = true;
+
+    jar.classList.remove("shake");
+    void jar.offsetWidth;
+    jar.classList.add("shake");
+
+    setTimeout(() => {
+
+        if (remaining.length === 0) {
+            remaining = [...activities];
+        }
+
+        const randomIndex = Math.floor(Math.random() * remaining.length);
+        const selected = remaining.splice(randomIndex, 1)[0];
+
+        activityText.textContent = selected;
+
+        counter.textContent = remaining.length === 0
+            ? "Bütün hayallerimizi çektik! 💚"
+            : `${remaining.length} tane daha güzel planımız var...`;
+
+        overlay.classList.add("show");
+
+        isAnimating = false;
+
+    }, 750);
+
+});
+
+// KAĞIDI KAPAT
+
+closeButton.addEventListener("click", () => {
+    overlay.classList.remove("show");
+});
+
+// DIŞARI TIKLAYINCA KAPAT
+
+overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) {
+        overlay.classList.remove("show");
+    }
+});
+
+// BEYAZ KALPLER
+
+function createHeart() {
+
+    const heart = document.createElement("div");
+
+    heart.className = "heart";
+    heart.innerHTML = "♥";
+
+    const size = Math.random() * 17 + 12;
+    const duration = Math.random() * 7 + 7;
+
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = size + "px";
+    heart.style.animationDuration = duration + "s";
+    heart.style.opacity = Math.random() * .5 + .4;
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, duration * 1000);
+}
+
+// KALPLERİ DÜZENLİ OLUŞTUR
+
+setInterval(createHeart, 450);
+
+// İLK KALPLER
+
+for (let i = 0; i < 15; i++) {
+    setTimeout(createHeart, i * 250);
+}
+
+</script>
+
+</body>
+</html>
+```
